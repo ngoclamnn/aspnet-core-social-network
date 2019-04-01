@@ -10,6 +10,7 @@ using NSwag.SwaggerGeneration.Processors.Security;
 using NSwag;
 using System.Collections.Generic;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNet.OData.Extensions;
 
 namespace Green.Web
 {
@@ -39,6 +40,7 @@ namespace Green.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddOData();
             services.AddSwaggerDocument(settings =>
             {
                 settings.Description = "Solotralveller web api back end tools";
