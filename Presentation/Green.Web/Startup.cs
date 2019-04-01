@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Green.Web.Framework.Infrastructure.Extensions;
 using System;
 using Microsoft.Extensions.Configuration;
+using NSwag.SwaggerGeneration.Processors.Security;
+using NSwag;
+using System.Collections.Generic;
+using Newtonsoft.Json.Serialization;
 
 namespace Green.Web
 {
@@ -35,6 +39,31 @@ namespace Green.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerDocument(settings =>
+            {
+                settings.Description = "Solotralveller web api back end tools";
+                settings.Title = "Solotralveller API";
+                // Add operation security scope processor
+                settings.DocumentName = "Solotralveller API";
+                settings.OperationProcessors.Add(new OperationSecurityScopeProcessor("API_KEY"));
+                // Add custom document processors, etc.
+                settings.DocumentProcessors.Add(new SecurityDefinitionAppender("API_KEY", new SwaggerSecurityScheme
+                {
+                    Type = SwaggerSecuritySchemeType.ApiKey,
+                    Name = "API_KEY",
+                    In = SwaggerSecurityApiKeyLocation.Header,
+                    Description = "API key authorization"
+                }));
+                // Post process the generated document
+                settings.PostProcess = (document) =>
+                {
+                    document.Schemes = new List<SwaggerSchema>
+                    {
+                            SwaggerSchema.Https,SwaggerSchema.Http
+                    };
+                };
+                settings.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            });
             return services.ConfigureApplicationServices(Configuration);
         }
 
@@ -47,7 +76,8 @@ namespace Green.Web
 				context.Database.Migrate();
 
 			}
-
+            app.UseSwagger();
+            app.UseSwaggerUi3();
             app.ConfigureRequestPipeline();
 
 
