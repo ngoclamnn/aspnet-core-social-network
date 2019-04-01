@@ -70,7 +70,7 @@ namespace Green.Web.Framework.Infrastructure.Extensions
         /// Register HttpContextAccessor
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
-        public static void AddHttpContextAccessor(this IServiceCollection services)
+        public static void AddHttpContextAccessor1(this IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }

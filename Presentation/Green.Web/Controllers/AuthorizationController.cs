@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Green.Core;
 using Green.Core.Domain.Users;
 using Green.Services.Authentication;
 using Green.Services.Security;
 using Green.Services.Users;
-using Green.Web.Framework.Helpers;
 using Green.Web.Models.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -81,7 +79,7 @@ namespace Green.Web.Controllers
 			if (!ModelState.IsValid)
 			{
 				// return 422
-				return new UnprocessableEntityObjectResult(ModelState);
+				return new Microsoft.AspNetCore.Mvc.UnprocessableEntityObjectResult(ModelState);
 			}
 
             //encrypting password
@@ -154,7 +152,7 @@ namespace Green.Web.Controllers
 			if (!ModelState.IsValid)
 			{
 				// return 422
-				return new UnprocessableEntityObjectResult(ModelState);
+				return new Microsoft.AspNetCore.Mvc.UnprocessableEntityObjectResult(ModelState);
 			}
 
             //encrypting password
@@ -244,7 +242,7 @@ namespace Green.Web.Controllers
 			if (!ModelState.IsValid)
 			{
 				// return 422
-				return new UnprocessableEntityObjectResult(ModelState);
+				return new Microsoft.AspNetCore.Mvc.UnprocessableEntityObjectResult(ModelState);
 			}
 
 			//encrypte password

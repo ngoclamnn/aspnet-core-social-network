@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Green.Core.Domain.Circles;
 using Green.Core.Domain.Users;
 using Green.Services.Authentication;
 using Green.Services.Circles;
 using Green.Services.Users;
-using Green.Web.Framework.Helpers;
 using Green.Web.Models.Circles;
 using Microsoft.AspNetCore.Mvc;
 
@@ -77,7 +74,7 @@ namespace Green.Web.Controllers
 			if (!ModelState.IsValid)
 			{
 				// return 422
-				return new UnprocessableEntityObjectResult(ModelState);
+				return new Microsoft.AspNetCore.Mvc.UnprocessableEntityObjectResult(ModelState);
 			}
 
 
