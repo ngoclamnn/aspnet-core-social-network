@@ -32,8 +32,8 @@ namespace Green.Web.Framework.Infrastructure.Extensions
 
                 //implement schedule tasks
                 //database is already installed, so start scheduled tasks
-                TaskManager.Instance.Initialize();
-                TaskManager.Instance.Start();
+                //TaskManager.Instance.Initialize();
+                //TaskManager.Instance.Start();
 
 
             return serviceProvider;
